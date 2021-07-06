@@ -16,6 +16,18 @@ public abstract class Staff {
         this.discipline = discipline;
         this.salary = salary;
     }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", yearsOfExperience=" + yearsOfExperience +
+                ", discipline='" + discipline + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
+
     protected String getName() {
         return name;
     }

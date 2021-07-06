@@ -1,64 +1,58 @@
 package com.company;
 
-import enums.TypeOfStaff;
+import enums.StaffRoles;
 
 import java.util.*;
 
 public class School {
-    public String schoolName;
-    public String schoolAddress;
-    public TypeOfStaff schoolPrincipal;
-    private TreeMap<String,Integer> listOfDepartments;
+    public final String schoolName;
+    public final String schoolAddress;
+    private final StaffRoles schoolPrincipal;
+    private TreeMap<String,Departments> listOfDepartments;
     private final TreeMap<String,Integer> listOfClasses;
-    private Map<Staff, TypeOfStaff> listOfStaffs;
+    private final Map<String, Staff> listOfStaffs;
 
-    public School(String schoolName, String schoolAddress) {
-        this.schoolName = schoolName;
-        this.schoolAddress = schoolAddress;
-        this.schoolPrincipal = TypeOfStaff.PRINCIPAL;
+    public School() {
+        this.schoolName = "Decagon High School";
+        this.schoolAddress = "Edo State";
+        this.schoolPrincipal = StaffRoles.PRINCIPAL;
         this.listOfDepartments = new TreeMap<>();
         this.listOfClasses = new TreeMap<>();
         this.listOfStaffs = new HashMap<>();
+    }
+
+    public Map<String, Staff> getListOfStaffs() {
+        return listOfStaffs;
+    }
+
+    public TreeMap<String, Departments> getListOfDepartments() {
+        return listOfDepartments;
+    }
+
+    public void setListOfDepartments(TreeMap<String, Departments> listOfDepartments) {
+        this.listOfDepartments = listOfDepartments;
     }
 
     public String getSchoolName() {
         return schoolName;
     }
 
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
-    }
 
     public String getSchoolAddress() {
         return schoolAddress;
     }
 
-    public void setSchoolAddress(String schoolAddress) {
-        this.schoolAddress = schoolAddress;
-    }
 
-    public TypeOfStaff getSchoolPrincipal() {
+    public StaffRoles getSchoolPrincipal() {
         return schoolPrincipal;
-    }
-
-    public void setSchoolPrincipal(TypeOfStaff schoolPrincipal) {
-        this.schoolPrincipal = schoolPrincipal;
-    }
-
-    public TreeMap<String, Integer> getListOfDepartments() {
-        return listOfDepartments;
-    }
-
-    public void setListOfDepartments(TreeMap<String, Integer> listOfDepartments) {
-        this.listOfDepartments = listOfDepartments;
     }
 
     public TreeMap<String, Integer> getListOfClasses() {
         return listOfClasses;
     }
 
-    protected TypeOfStaff addStaff(Staff staff, TypeOfStaff role){
-        return listOfStaffs.put(staff,role);
+    protected void addStaff(Staff staff, String startName){
+        listOfStaffs.put(startName,staff);
     }
     protected String  viewSchoolProfile(){
         return schoolName+"\n"+schoolAddress+"\n"+schoolPrincipal+"\n"+listOfClasses+"\n"+listOfDepartments+

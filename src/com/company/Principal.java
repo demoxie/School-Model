@@ -1,19 +1,32 @@
 package com.company;
 
+import EmailSenderServices.EmailSender;
 import StaffServices.PrincipalServices;
-import enums.TypeOfStaff;
+import enums.StaffRoles;
 
-import java.util.TreeMap;
-
-public class Principal extends Staff implements PrincipalServices {
-    private final TypeOfStaff role;
+public class Principal extends Staff{
+    private final StaffRoles role;
+    private EmailSender emailSender;
+    private final String principalEmailAddress;
+    private PrincipalServices principalServices;
     public Principal(String name, Integer age, Integer yearsOfExperience, String discipline, Double salary) {
         super(name, age, yearsOfExperience, discipline, salary);
-        this.role = TypeOfStaff.PRINCIPAL;
+        this.role = StaffRoles.PRINCIPAL;
+        this.principalEmailAddress = "mrballa@gmail.com";
 
     }
 
-    public TypeOfStaff getRole() {
+    @Override
+    public String toString() {
+        return "Principal{" +
+                "role=" + role +
+                ", emailSender=" + emailSender +
+                ", principalEmailAddress='" + principalEmailAddress + '\'' +
+                ", principalServices=" + principalServices +
+                '}';
+    }
+
+    public StaffRoles getRole() {
         return role;
     }
 
@@ -68,24 +81,7 @@ public class Principal extends Staff implements PrincipalServices {
         super.setSalary(salary);
     }
 
-    @Override
-    public void expelStudent(String studentID) {
-
-    }
-
-    @Override
-    public void admitStudent(Applicant applicant) {
-
-    }
-
-    @Override
-    public void viewStudentProfile(String studentID) {
-
-    }
-
-    @Override
-    public void viewStudentList() {
-        Departments departments = Departments;
-
+    public String getPrincipalEmailAddress() {
+        return principalEmailAddress;
     }
 }

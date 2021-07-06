@@ -4,33 +4,31 @@ import StudentService.StudentService;
 
 import java.util.TreeMap;
 
-public class Student implements StudentService {
+public class Student extends  Departments implements StudentService {
     protected String name;
     protected Integer age;
     protected String gender;
-    protected Integer classID;
-    protected Integer studentID;
+    protected String currentClass;
+    protected String departmentName;
+    protected String parentEmail;
     protected TreeMap<String,Subject>  listOfSubjectsTaking;
 
-    public Student(String name, Integer age, String gender, int classID, Integer studentID, TreeMap<String, Subject> listOfSubjectsTaking) {
+    public Student(String departmentName, String name, Integer age, String gender, String Class,String parentEmail) {
+        this.departmentName = departmentName;
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.classID = classID;
-        this.studentID = studentID;
-        this.listOfSubjectsTaking = listOfSubjectsTaking;
+        this.currentClass = Class;
+        this.listOfSubjectsTaking = new TreeMap<>();
+        this.parentEmail = parentEmail;
     }
 
-    @Override
-    public String toString() {
-        return "TypeOfStudent{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", classID=" + classID +
-                ", studentID=" + studentID +
-                ", listOfSubjectsTaking=" + listOfSubjectsTaking +
-                '}';
+    public String getCurrentClass() {
+        return currentClass;
+    }
+
+    public void setCurrentClass(String currentClass) {
+        this.currentClass = currentClass;
     }
 
     public String getName() {
@@ -39,6 +37,33 @@ public class Student implements StudentService {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getParentEmail() {
+        return parentEmail;
+    }
+
+    public void setParentEmail(String parentEmail) {
+        this.parentEmail = parentEmail;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeOfStudent{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", classID=" + currentClass +
+                ", listOfSubjectsTaking=" + listOfSubjectsTaking +
+                '}';
+    }
+
+    public String getDepartmentName() {
+        return name;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.name = departmentName;
     }
 
     public Integer getAge() {
@@ -57,20 +82,8 @@ public class Student implements StudentService {
         this.gender = gender;
     }
 
-    public Integer getClassID() {
-        return classID;
-    }
-
-    public void setClassID(Integer classID) {
-        this.classID = classID;
-    }
-
-    public Integer getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(Integer studentID) {
-        this.studentID = studentID;
+    public void setClass(String aClass) {
+        this.currentClass = aClass;
     }
 
     public TreeMap<String, Subject> getListOfSubjectsTaking() {
@@ -82,7 +95,9 @@ public class Student implements StudentService {
     }
 
     @Override
-    public void takeACourse(Subject subject, String subjectName) {
+    public void takeACourse(Subject subject, String subjectName,String studentName) {
+
         this.listOfSubjectsTaking.put(subjectName,subject);
     }
+
 }

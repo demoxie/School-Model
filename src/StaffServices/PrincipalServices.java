@@ -1,16 +1,17 @@
 package StaffServices;
 
 import com.company.Applicant;
-import com.company.Subject;
-import enums.TypeOfStaff;
+import com.company.Departments;
+import com.company.Student;
+import enums.StaffRoles;
 
-import java.util.TreeMap;
+import java.util.List;
 
 public interface PrincipalServices {
-    TypeOfStaff role = TypeOfStaff.PRINCIPAL;
-    void expelStudent(String studentID);
-    void admitStudent(Applicant applicant);
-    void viewStudentProfile(String studentID);
-    void viewStudentList();
+    StaffRoles role = StaffRoles.PRINCIPAL;
+    void expelStudent(Departments departments,String studentID);
+    void admitStudent(Applicant applicant,Departments departments) throws InterruptedException;
+    void viewStudentProfile(String studentID,Departments departments);
+    List<Student> viewStudentList(Departments departments);
 
 }

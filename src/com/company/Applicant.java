@@ -2,25 +2,60 @@ package com.company;
 
 import ApplicantService.ApplicantService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Applicant implements ApplicantService {
-    private String studentName;
+    private String applicantName;
     private Integer age;
+    private String gender;
     private String previousClass;
     private String intendedClassForAdmission;
+    private String parentEmail;
 
-    public Applicant(String studentName, Integer age, String previousClass, String intendedClassForAdmission) {
-        this.studentName = studentName;
+    public Applicant(String studentName, Integer age,String gender, String previousClass, String intendedClassForAdmission,String parentEmail) {
+        this.applicantName = studentName;
         this.age = age;
+        this.gender = gender;
         this.previousClass = previousClass;
         this.intendedClassForAdmission = intendedClassForAdmission;
+        this.parentEmail = parentEmail;
     }
 
-    public String getStudentName() {
-        return studentName;
+    @Override
+    public String toString() {
+        return "Applicant{" +
+                "applicantName='" + applicantName + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", previousClass='" + previousClass + '\'' +
+                ", intendedClassForAdmission='" + intendedClassForAdmission + '\'' +
+                ", parentEmail='" + parentEmail + '\'' +
+                '}';
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public String getParentEmail() {
+        return parentEmail;
+    }
+
+    public void setParentEmail(String parentEmail) {
+        this.parentEmail = parentEmail;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getApplicantName() {
+        return applicantName;
+    }
+
+    public void setApplicantName(String applicantName) {
+        this.applicantName = applicantName;
     }
 
     public Integer getAge() {
@@ -48,7 +83,14 @@ public class Applicant implements ApplicantService {
     }
 
     @Override
-    public void apply(School school, String studentName, Integer age, String previousClass, String intendedClassForAdmission) {
-
+    public Map<String, String> apply() {
+        Map<String,String> profile = new HashMap<>();
+        profile.put("Name",this.applicantName);
+        profile.put("Age",Integer.toString(this.age));
+        profile.put("Gender",this.gender);
+        profile.put("Previous Class",this.previousClass);
+        profile.put("Class applying for",this.intendedClassForAdmission);
+        profile.put("Parent's Email",this.intendedClassForAdmission);
+        return profile;
     }
 }

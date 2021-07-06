@@ -1,20 +1,44 @@
 package com.company;
 
+import Exceptions.AlreadyTeachingThisSubject;
+import Exceptions.TryingToTeachTheWrongSubject;
+import Service_Implementations.TeacherServiceImpl;
 import StaffServices.TeacherService;
-import enums.TypeOfStaff;
+import enums.StaffRoles;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Teacher extends Staff implements TeacherService {
-    private final TypeOfStaff role;
-    private final Map<String,Subject> listOfSubjectsTeaching;
+    private final StaffRoles role;
+    private Map<String,String> listOfSubjectsTeaching;
+    private TeacherServiceImpl teacherService;
+    private Departments departments;
     public Teacher(String name, Integer age, Integer yearsOfExperience, String discipline, Double salary) {
         super(name, age, yearsOfExperience, discipline, salary);
-        this.role = TypeOfStaff.ACADEMIC;
+        this.role = StaffRoles.TEACHER;
         this.listOfSubjectsTeaching = new HashMap<>();
 
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "role=" + role +
+                ", listOfSubjectsTeaching=" + listOfSubjectsTeaching +
+                ", teacherService=" + teacherService +
+                ", departments=" + departments +
+                '}';
+    }
+
+    public Map<String,String> getListOfSubjectsTeaching() {
+        return listOfSubjectsTeaching;
+    }
+
+    public void setListOfSubjectsTeaching(Map<String,String>  listOfSubjectsTeaching) {
+        this.listOfSubjectsTeaching = listOfSubjectsTeaching;
+    }
+
     @Override
     public String getName() {
         return super.getName();
@@ -66,7 +90,17 @@ public class Teacher extends Staff implements TeacherService {
     }
 
     @Override
-    public void teachACourse(Subject subject, String subjectName) {
-        this.listOfSubjectsTeaching.put(subjectName,subject);
+    public void teachACourse(Subject subject, String subjectName) throws TryingToTeachTheWrongSubject {
+        if(!departments.getListOfSubjects().containsKey(subjectName)){
+            if(!this.listOfSubjectsTeaching.get(subjectName).equals(subjectName)){
+                throw new AlreadyTeachingThisSubject();
+            }else{
+                teacherService.teachACourse(subject,subjectName);
+            }
+        }else{
+            throw new TryingToTeachTheWrongSubject();
+        }
+
+
     }
 }

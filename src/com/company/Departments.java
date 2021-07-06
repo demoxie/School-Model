@@ -1,48 +1,62 @@
 package com.company;
 
+import java.security.SecureRandom;
 import java.util.*;
+import java.util.stream.Collectors;
 
-public abstract class Departments extends School{
-    protected String name;
-    protected Integer departmentID;
-    protected List<Staff> listOfStaffs;
-    protected Map<String,Integer> listOfSubjects;
+public class Departments extends School{
+    protected String departmentName;
+    private List<Student> listOfStudents;
+    private List<Student> listOfStaffs;
+    private Map<String,List<Subject>> listOfSubjects;
 
-    public Departments(String name, Integer departmentID) {
-        super();
-        this.name = name;
-        this.departmentID = departmentID;
-        this.listOfStaffs = new ArrayList<>();
+    public Departments() {
+        this.departmentName = "";
+        this.listOfStudents = new ArrayList<>();
         this.listOfSubjects = new HashMap<>();
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String toString() {
+        return "Departments{" +
+                "departmentName='" + departmentName + '\'' +
+                ", listOfStudents=" + listOfStudents +
+                ", listOfSubjects=" + listOfSubjects +
+                '}';
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setListOfSubjects(Map<String, List<Subject>> listOfSubjects) {
+        this.listOfSubjects = listOfSubjects;
     }
 
-    public Integer getDepartmentID() {
-        return departmentID;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartmentID(Integer departmentID) {
-        this.departmentID = departmentID;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public List<Staff> getListOfStaffs() {
-        return listOfStaffs;
+
+    public List<Student> getListOfStudents() {
+        return listOfStudents;
     }
 
-    public void setListOfStaffs(List<Staff> listOfStaffs) {
-        this.listOfStaffs = listOfStaffs;
+    public void setListOfStudents(List<Student> listOfStudents) {
+        this.listOfStudents = listOfStudents;
     }
-    private String departmentID(){
-        Random random = new Random();
-        int code = random.nextInt(1000);
-        String id = forma
-        return
+    protected void addSubjects(String departmentName,Subject subject){
+        List<Subject> subjects = this.listOfSubjects.get(departmentName);
+        if (subjects == null) {
+            subjects = new ArrayList<>();
+        }
+
+        subjects.add(subject);
+
+        this.listOfSubjects.put(departmentName, subjects);
     }
+    protected Map<String, List<Subject>> getListOfSubjects(){
+        return this.listOfSubjects;
+    }
+
 }

@@ -1,7 +1,7 @@
 package ApplicantService;
 
-import com.company.School;
+import java.util.Map;
 
 public interface ApplicantService {
-    void apply(School school, String studentName, Integer age, String previousClass, String intendedClassForAdmission);
+    Map<String, String> apply();
 }
